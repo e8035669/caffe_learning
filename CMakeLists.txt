@@ -43,6 +43,7 @@ set(UTIL_PATHS
     #${CMAKE_CURRENT_SOURCE_DIR}/util/util1
     #${CMAKE_CURRENT_SOURCE_DIR}/util/util2
     ${CMAKE_CURRENT_SOURCE_DIR}/util/generate_database
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/predict_classify
 	)
 
 if(${BUILD_TEST})

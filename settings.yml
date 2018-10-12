@@ -1,0 +1,5 @@
+---
+ModelSetting: "/home/jeff/datasets/ann_stand/setting/ann_stand_deploy.prototxt"
+ModelFile: "/home/jeff/datasets/ann_stand/model/model2/ann_stand_solver_iter_828.caffemodel"
+LabelFile: "/home/jeff/datasets/ann_stand/setting/labels.txt"
+FileList: "/home/jeff/datasets/ann_stand/data/"

@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Set variables
-set(PROJECT_NAME generate_database)
+set(PROJECT_NAME predict_classify)
 set(PROJECT_LANGUAGE C CXX)
-set(PROJECT_DEPS ${Caffe_LIBRARIES} ${OpenCV_LIBS} glog::glog)
+set(PROJECT_DEPS ${Caffe_LIBRARIES} ${OpenCV_LIBS} ${YAML_CPP_LIBRARIES})
 
 # Compile setting
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")

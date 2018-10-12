@@ -25,6 +25,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Caffe REQUIRED)
 
+find_package(yaml-cpp REQUIRED)
+include_directories(${YAML_CPP_INCLUDE_DIR})
+
+find_package(glog REQUIRED)
 
 # Add subdirectory
 foreach(DEPS_PATH ${DEPS_PATHS})
