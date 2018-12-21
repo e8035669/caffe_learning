@@ -16,4 +16,5 @@ std::ostream& operator<<(std::ostream& os, std::vector<int> vec) {
     return os;
 }
 
+
 #endif

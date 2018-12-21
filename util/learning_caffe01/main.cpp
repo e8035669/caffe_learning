@@ -1,7 +1,7 @@
-#include <iostream>
 #include <glog/logging.h>
 #include <google/protobuf/text_format.h>
 #include <caffe/caffe.hpp>
+#include <iostream>
 #include "print_vec.h"
 
 using namespace std;
@@ -22,14 +22,23 @@ layer {
     }
 }
 layer {
+    name: "scale0"
+    type: "Scale"
+    top: "data"
+    bottom: "data" # in place
+    scale_param {
+        filler { value: 1.5 }
+        bias_term: true
+        bias_filler { value: -3 } # Y = 1.5 * X + -3
+    }
+}
+layer {
     name: "bias0"
     type: "Bias"
     top: "bias0"
     bottom: "data"
     bias_param {
-        filler {
-            value: 10
-        }
+        filler { value: 10 } # Y = X + 10
     }
 }
 )foo";
@@ -72,5 +81,5 @@ int main(int argc, char** argv) {
     }
     cout << "]" << endl;
 
-	return 0;
+    return 0;
 }
