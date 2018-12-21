@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
         vector<float> output(begin, end);
         cout << "output: ";
         for (auto& f : output) {
-            printf("%.2f, ", f);
+            printf("%.1f, ", f);
         }
         cout << endl;
         int maxIndex = max_element(output.begin(), output.end()) - output.begin();
