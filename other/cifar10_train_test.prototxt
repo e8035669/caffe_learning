@@ -1,0 +1,10 @@
+name: "CIFAR10"
+layer {
+    name: "inputLayer"
+    type: "Input"
+    top: "inputLayer"
+    input_param {
+        shape: {dim: 64 dim: 3 dim: 32 dim: 32}
+    }
+    
+}
