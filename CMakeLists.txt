@@ -46,6 +46,7 @@ set(UTIL_PATHS
     ${CMAKE_CURRENT_SOURCE_DIR}/util/predict_classify
     ${CMAKE_CURRENT_SOURCE_DIR}/util/learning_caffe01
     ${CMAKE_CURRENT_SOURCE_DIR}/util/learning_caffe02
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/learning_caffe03
 	)
 
 if(${BUILD_TEST})

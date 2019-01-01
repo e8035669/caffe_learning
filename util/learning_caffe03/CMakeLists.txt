@@ -1,25 +1,20 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Set variables
-set(PROJECT_NAME misc)
-set(PROJECT_LANGUAGE C CXX)
-file(GLOB PROJECT_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
-set(PROJECT_DEPS)
+get_filename_component(DIR_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+set(PROJECT_NAME ${DIR_NAME})
+set(PROJECT_LANGUAGE CXX)
+set(PROJECT_DEPS misc ${Caffe_LIBRARIES})
 
 # Compile setting
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_C_FLAGS_RELEASE "-O3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_STANDARD 14)
 
-# Set default build option
+# Set default build type
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Release)
-endif()
-
-if(NOT BUILD_SHARED_LIBS)
-	set(BUILD_SHARED_LIBS OFF)
 endif()
 
 # Set project
@@ -39,16 +34,12 @@ file(GLOB PROJECT_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 	)
 
-# Build library
-add_library(${PROJECT_NAME} ${PROJECT_SRCS})
+# Build utility
+add_executable(${PROJECT_NAME} ${PROJECT_SRCS})
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	OUTPUT_NAME ${PROJECT_NAME}
-	PREFIX "lib"
 	)
-
-if(${BUILD_SHARED_LIBS})
-	target_link_libraries(${PROJECT_NAME} ${PROJECT_DEPS})
-endif()
+target_link_libraries(${PROJECT_NAME} ${PROJECT_DEPS})
 
 # Install
 install(TARGETS ${PROJECT_NAME}
@@ -56,7 +47,4 @@ install(TARGETS ${PROJECT_NAME}
 	ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib"
 	LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib"
 	PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
-	)
-install(FILES ${PROJECT_HEADERS}
-	DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
 	)
