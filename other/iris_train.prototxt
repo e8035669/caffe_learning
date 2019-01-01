@@ -1,16 +1,17 @@
 name: "IRIS"
 layer {
     name: "input_layer"
-    type: "Input"
+    type: "Data"
     top: "input"
     top: "truth"
-    input_param {
-        shape: {dim: 4}
-        shape: {dim: 3}
+    data_param {
+        source: "build/install/bin/iris_lmdb"
+        batch_size: 10
+        backend: LMDB
     }
-    include {
-        phase: TRAIN
-    }
+    #include {
+    #    phase: TRAIN
+    #}
 }
 layer {
     name: "ip1"
@@ -44,5 +45,15 @@ layer {
     bottom: "output"
     bottom: "truth"
     top: "loss"
+}
+layer {
+    name: "accuracy"
+    type: "Accuracy"
+    bottom: "output"
+    bottom: "truth"
+    top: "accuracy"
+    include {
+        phase: TEST
+    }
 }
 

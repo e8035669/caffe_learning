@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
     LOG(INFO) << "This Script will write iris dataset into lmdb.";
 
     unique_ptr<db::DB> db(db::GetDB("lmdb"));
-    db->Open("iris-lmdb", db::NEW);
+    db->Open("iris_lmdb", db::NEW);
     unique_ptr<db::Transaction> txn(db->NewTransaction());
 
     Datum datum;
