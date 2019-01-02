@@ -1,0 +1,63 @@
+name: "IRIS"
+layer {
+    name: "input_layer"
+    type: "Input"
+    top: "input"
+    top: "truth"
+    input_param {
+        shape {dim: 10 dim: 4}
+        shape {dim: 10 dim: 1}
+    }
+    #data_param {
+    #    source: "build/install/bin/iris_lmdb"
+    #    batch_size: 10
+    #    backend: LMDB
+    #}
+    #include {
+    #    phase: TRAIN
+    #}
+}
+layer {
+    name: "ip1"
+    type: "InnerProduct"
+    bottom: "input"
+    top: "ip1"
+    inner_product_param {
+        num_output: 10
+        weight_filler {
+            type: "xavier"
+        }
+        bias_filler {
+            type : "xavier"
+        }
+    }
+}
+layer {
+    name: "output"
+    type: "InnerProduct"
+    bottom: "ip1"
+    top: "output"
+    inner_product_param {
+        num_output: 3
+        weight_filler {type: "xavier"}
+        bias_filler {type: "xavier"}
+    }
+}
+layer {
+    name: "loss"
+    type: "SoftmaxWithLoss"
+    bottom: "output"
+    bottom: "truth"
+    top: "loss"
+}
+layer {
+    name: "accuracy"
+    type: "Accuracy"
+    bottom: "output"
+    bottom: "truth"
+    top: "accuracy"
+    include {
+        phase: TEST
+    }
+}
+
