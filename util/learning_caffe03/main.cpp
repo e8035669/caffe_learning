@@ -20,8 +20,8 @@ int main(int argc, char** argv) {
     unique_ptr<db::Transaction> txn(db->NewTransaction());
 
     Datum datum;
-    datum.set_channels(1);
-    datum.set_width(4);
+    datum.set_channels(4);
+    datum.set_width(1);
     datum.set_height(1);
     for (int i = 0; i < 150; i++) {
         datum.clear_label();
