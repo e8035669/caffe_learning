@@ -13,22 +13,21 @@ using namespace caffe;
 class SolveCallback : public Solver<float>::Callback {
    public:
     SolveCallback(std::shared_ptr<Solver<float>> solver)
-        : solver(solver), indexCounter(0) {
-        auto net = this->solver->net();
-        auto& input = net->input_blobs();
+        : solver(solver), input(solver->net()->input_blobs()), indexCounter(0) {
         LOG(INFO) << "input.size()" << input.size();
-        this->input0 = input[0];
-        this->input1 = input[1];
-        this->num = input0->num();
+        this->num = input[0]->num();
     }
 
    protected:
     virtual void on_start() override {
-        float* data = input0->mutable_cpu_data();
-        float* label = input1->mutable_cpu_data();
+        float* data = input[0]->mutable_cpu_data();
+        float* label = input[1]->mutable_cpu_data();
         for (int i = 0; i < this->num; ++i) {
-            caffe_copy(4, IRIS_DATASET + indexCounter * 4, data);
-            *label = IRIS_DATASET[indexCounter];
+            //caffe_copy(4, IRIS_DATASET + indexCounter * 4, data + i * 4);
+            for (int j = 0; j < 4; j++) {
+                data[i * 4 + j] = IRIS_DATASET[indexCounter * 4 + j];
+            }
+            label[i] = IRIS_TRUTH[indexCounter];
             nextData();
         }
     }
@@ -37,8 +36,7 @@ class SolveCallback : public Solver<float>::Callback {
 
    private:
     std::shared_ptr<Solver<float>> solver;
-    Blob<float>* input0;
-    Blob<float>* input1;
+    const vector<Blob<float>*>& input;
     int indexCounter;
     int num;
 
@@ -50,7 +48,7 @@ class SolveCallback : public Solver<float>::Callback {
 int main(int argc, char** argv) {
     FLAGS_logtostderr = true;
     caffe::GlobalInit(&argc, &argv);
-    Caffe::set_mode(Caffe::GPU);
+    Caffe::set_mode(Caffe::CPU);
 
     SolverParameter solverParam;
     ReadSolverParamsFromTextFileOrDie(argv[1], &solverParam);

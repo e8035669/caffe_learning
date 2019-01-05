@@ -20,6 +20,7 @@ display: 100
 max_iter: 10000
 # snapshot intermediate results
 snapshot: 5000
-snapshot_prefix: "build/install/bin/snapshot"
+snapshot_prefix: "build/install/bin/manual"
 # solver mode: CPU or GPU
-solver_mode: GPU
+solver_mode: CPU
+#debug_info: True

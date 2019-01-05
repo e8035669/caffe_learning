@@ -1,0 +1,43 @@
+name: "IRIS"
+layer {
+    name: "input_layer"
+    type: "Input"
+    top: "input"
+    input_param {
+        shape {dim: 1 dim: 4}
+    }
+}
+layer {
+    name: "ip1"
+    type: "InnerProduct"
+    bottom: "input"
+    top: "ip1"
+    inner_product_param {
+        num_output: 10
+        weight_filler {
+            type: "xavier"
+        }
+        bias_filler {
+            type : "xavier"
+        }
+    }
+}
+layer {
+    name: "output"
+    type: "InnerProduct"
+    bottom: "ip1"
+    top: "output"
+    inner_product_param {
+        num_output: 3
+        weight_filler {type: "xavier"}
+        bias_filler {type: "xavier"}
+    }
+}
+
+#layer {
+#    name: "loss"
+#    type: "SoftmaxWithLoss"
+#    bottom: "output"
+#    bottom: "truth"
+#    top: "loss"
+#}
