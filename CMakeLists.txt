@@ -49,6 +49,7 @@ set(UTIL_PATHS
     ${CMAKE_CURRENT_SOURCE_DIR}/util/learning_caffe03
     ${CMAKE_CURRENT_SOURCE_DIR}/util/learning_caffe04
     ${CMAKE_CURRENT_SOURCE_DIR}/util/learning_caffe05
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/learning_caffe06
 	)
 
 if(${BUILD_TEST})
